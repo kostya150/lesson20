@@ -1,5 +1,7 @@
 package lesson20.task2;
 
+import lesson15.equals.File;
+
 import java.util.Date;
 
 public class Transaction {
@@ -43,5 +45,19 @@ public class Transaction {
     public Date getDateCreated() {
         return dateCreated;
     }
-    public boolean equals(){return true;}
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Transaction transaction = (Transaction) o;
+        if (id != transaction.id) return true;
+        if (city.equals(transaction.city)) return false;
+        if(amount != transaction.amount) return true;
+        if (description.equals(transaction.description)) return false;
+        if (type.equals(transaction.type)) return false;
+
+        return true;
+
+    }
 }
