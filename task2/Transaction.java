@@ -1,6 +1,6 @@
 package lesson20.task2;
 
-import lesson15.equals.File;
+
 
 import java.util.Date;
 
