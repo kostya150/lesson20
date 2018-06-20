@@ -14,8 +14,8 @@ public class TransactionDAO {
     public static Transaction save(Transaction transaction) throws BadRequestException, InternalServerException {
         //TODO если город оплаты (совершения транзакции) не разрешен bad request exception +
         //TODO не хватило места internal server exception
-        validate(transaction);
-        if (transaction != null) {
+        ;
+        if (validate(transaction)) {
             for (int i = 0; i <= transactions.length; i++) {
                 if (transactions[i] == null) {
                     transactions[i] = transaction;
@@ -27,7 +27,7 @@ public class TransactionDAO {
         return null;
     }
 
-    public static void validate(Transaction transaction) throws BadRequestException, InternalServerException {
+    public static boolean validate(Transaction transaction) throws BadRequestException, InternalServerException {
         if(transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed" + transaction.getId() + ". Can't be saved");
 
@@ -56,6 +56,7 @@ public class TransactionDAO {
                 throw new InternalServerException("There is no place to save" + transaction.getId() + ". Can't be saved");
 
         }
+        return false;
     }
      public static Transaction[] transactionList(){
          //Transaction[] transactions = new Transaction[10];

@@ -43,4 +43,5 @@ public class Transaction {
     public Date getDateCreated() {
         return dateCreated;
     }
+    public boolean equals(){return true;}
 }
