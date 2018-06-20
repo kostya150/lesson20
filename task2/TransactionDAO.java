@@ -15,9 +15,16 @@ public class TransactionDAO {
         //TODO если город оплаты (совершения транзакции) не разрешен bad request exception +
         //TODO не хватило места internal server exception
         validate(transaction);
+        if (transaction != null) {
+            for (int i = 0; i <= transactions.length; i++) {
+                if (transactions[i] == null) {
+                    transactions[i] = transaction;
+                    return transactions[i];
+                }
+            }
 
-
-        return transaction;
+        }
+        return null;
     }
 
     public static void validate(Transaction transaction) throws BadRequestException, InternalServerException {
