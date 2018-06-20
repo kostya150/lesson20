@@ -5,9 +5,9 @@ package lesson20.task2;
 import java.util.Date;
 
 public class Transaction {
-    private static long id;
-    private static String city;
-    private static int amount;
+    private long id;
+    private String city;
+    private int amount;
     private String description;
     private TransactionType type;
     private Date dateCreated;
@@ -22,15 +22,15 @@ public class Transaction {
         this.dateCreated = dateCreated;
     }
 
-    public static long getId() {
+    public long getId() {
         return id;
     }
 
-    public static String getCity() {
+    public String getCity() {
         return city;
     }
 
-    public static int getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -46,18 +46,28 @@ public class Transaction {
         return dateCreated;
     }
 
+
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Transaction transaction = (Transaction) o;
-        if (id != transaction.id) return true;
-        if (city.equals(transaction.city)) return false;
-        if(amount != transaction.amount) return true;
-        if (description.equals(transaction.description)) return false;
-        if (type.equals(transaction.type)) return false;
+        Transaction that = (Transaction) o;
 
-        return true;
-
+        if (id != that.id) return false;
+        if (amount != that.amount) return false;
+        if (!city.equals(that.city)) return false;
+        if (!description.equals(that.description)) return false;
+        return type == that.type;
+    }
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + city.hashCode();
+        result = 31 * result + amount;
+        result = 31 * result + description.hashCode();
+        result = 31 * result + type.hashCode();
+        return result;
     }
 }
