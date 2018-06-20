@@ -1,21 +1,21 @@
 package lesson20.task2;
 
 public class Utils {
-    public int LimitTransactionsPerDayCount = 10;
-    public int LimitTransactionsPerDayAmount = 100;
-    public int LimitSimpleTransactionAmount = 40;
+    public int limitTransactionsPerDayCount = 10;
+    public int limitTransactionsPerDayAmount = 100;
+    public int limitSimpleTransactionAmount = 40;
     public String[] cities = {"Kiev", "Odessa"};
 
     public int getLimitTransactionsPerDayCount() {
-        return LimitTransactionsPerDayCount;
+        return limitTransactionsPerDayCount;
     }
 
     public int getLimitTransactionsPerDayAmount() {
-        return LimitTransactionsPerDayAmount;
+        return limitTransactionsPerDayAmount;
     }
 
     public int getLimitSimpleTransactionAmount() {
-        return LimitSimpleTransactionAmount;
+        return limitSimpleTransactionAmount;
     }
 
     public String[] getCities() {
