@@ -8,12 +8,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TransactionDAO {
-    private static Transaction[] transactions = new Transaction[10];
-    private static Utils utils = new Utils();
+    private Transaction[] transactions = new Transaction[10];
+    private Utils utils = new Utils();
 
-    public static Transaction save(Transaction transaction) throws BadRequestException, InternalServerException {
-        //TODO если город оплаты (совершения транзакции) не разрешен bad request exception +
-        //TODO не хватило места internal server exception
+    public Transaction save(Transaction transaction) throws BadRequestException, InternalServerException {
+
         if (validate(transaction)) {
             for (int i = 0; i <= transactions.length; i++) {
                 if (transactions[i] == null) {
@@ -26,7 +25,7 @@ public class TransactionDAO {
         return null;
     }
 
-    public static boolean validate(Transaction transaction) throws BadRequestException, InternalServerException {
+    public boolean validate(Transaction transaction) throws BadRequestException, InternalServerException {
         if(transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed" + transaction.getId() + ". Can't be saved");
 
@@ -46,7 +45,6 @@ public class TransactionDAO {
 
         }else
             throw new BadRequestException("Bad request of transaction" + transaction.getId() + ". Can't be saved");
-        //TODO не хватило места internal server exception
 
         for (int i = 0; i <= transactions.length; i++) {
             if (transactions[i] == null) {
@@ -57,13 +55,19 @@ public class TransactionDAO {
         }
         return false;
     }
-     public static Transaction[] transactionList(){
+     public Transaction[] transactionList() throws InternalServerException {
          //Transaction[] transactions = new Transaction[10];
         //TODO
-        return transactions;
+         for (int i = 0; i <= transactions.length; i++) {
+             if (transactions[i] == null) {
+                 throw new InternalServerException("There are no transactions");
+             }
+         }
+
+             return transactions;
 
     }
-    public static Transaction[] transactionList(String city) throws BadRequestException {
+    public Transaction[] transactionList(String city) throws BadRequestException {
 
         if (transactions != null) {
             int count = 0;
@@ -87,7 +91,7 @@ public class TransactionDAO {
         return transactions;
         }
 
-    public static Transaction[] transactionList(int amount) throws BadRequestException {
+    public Transaction[] transactionList(int amount) throws BadRequestException {
 
         if (transactions != null) {
             int count = 0;
@@ -111,7 +115,7 @@ public class TransactionDAO {
         return transactions;
     }
 
-    private static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction){
+    private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
