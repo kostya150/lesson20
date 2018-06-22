@@ -22,7 +22,7 @@ public class TransactionDAO {
             }
 
         }
-        return null;
+        throw new InternalServerException("Transaction is not saved");
     }
 
     public boolean validate(Transaction transaction) throws BadRequestException, InternalServerException {
