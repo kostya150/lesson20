@@ -73,7 +73,7 @@ public class TransactionDAO {
             int count = 0;
 
             for (int i = 0; i < transactions.length; i++) {
-                if(city.equals(Transaction.getCity())){// если имя введенного города совпадает с транзакциями этого города.
+                if(city.equals(transactions[i].getCity())){// если имя введенного города совпадает с транзакциями этого города.
                     count++;
                 }
             }
@@ -97,7 +97,7 @@ public class TransactionDAO {
             int count = 0;
 
             for (int i = 0; i < transactions.length; i++) {
-                if (amount == Transaction.getAmount()) {
+                if (amount == transactions[i].getAmount()) {
                     count++;
                 }
             }
