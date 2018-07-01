@@ -35,36 +35,29 @@ public class TransactionDAO {
             sum += tr.getAmount();
             count++;
         }
-        if(sum > utils.getLimitTransactionsPerDayAmount()){
+        if(sum > utils.getLimitTransactionsPerDayAmount()){//TODO
             throw new LimitExceeded("Transaction limit per day amount exceeded" + transaction.getId() + ". Can't be saved");
         }
-        if(count > utils. getLimitTransactionsPerDayCount()){
+        if(count > utils. getLimitTransactionsPerDayCount()){//TODO
             throw new LimitExceeded("Transaction limit per day count exceed" + transaction.getId() + ". Can't be saved");
         }
         if(transaction.getCity().equals(utils.getCities())){
             throw new BadRequestException("Bad request of transaction" + transaction.getId() + ". Can't be saved");
         }
 
-
-        for (int i = 0; i <= transactions.length; i++) {
-            if (transactions[i] == null) {
-                transactions[i] = transaction;
-            }else
-                throw new InternalServerException("There is no place to save" + transaction.getId() + ". Can't be saved");
-
-        }
-        return false;
+        return true;
     }
      public Transaction[] transactionList() throws InternalServerException {
          //Transaction[] transactions = new Transaction[10];
         //TODO
          for (int i = 0; i <= transactions.length; i++) {
-             if (transactions[i] == null) {
+             if (transactions != null){
+                 return transactions;
+             }else
                  throw new InternalServerException("There are no transactions");
-             }
          }
 
-             return transactions;
+
 
     }
     public Transaction[] transactionList(String city) throws BadRequestException {
