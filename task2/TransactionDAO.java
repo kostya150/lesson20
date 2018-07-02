@@ -48,8 +48,7 @@ public class TransactionDAO {
         return true;
     }
      public Transaction[] transactionList() throws InternalServerException {
-         //Transaction[] transactions = new Transaction[10];
-        //TODO
+        
          for (int i = 0; i <= transactions.length; i++) {
              if (transactions != null){
                  return transactions;
@@ -66,8 +65,10 @@ public class TransactionDAO {
             int count = 0;
 
             for (int i = 0; i < transactions.length; i++) {
+                if(transactions[i] != null){
                 if(city.equals(transactions[i].getCity())){// если имя введенного города совпадает с транзакциями этого города.
                     count++;
+                }
                 }
             }
             Transaction[] transactions = new Transaction[count];
