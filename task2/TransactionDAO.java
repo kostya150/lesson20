@@ -48,13 +48,14 @@ public class TransactionDAO {
         return true;
     }
      public Transaction[] transactionList() throws InternalServerException {
-        
+
          for (int i = 0; i <= transactions.length; i++) {
              if (transactions != null){
                  return transactions;
              }else
                  throw new InternalServerException("There are no transactions");
          }
+         return null;
 
 
 
