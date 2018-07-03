@@ -28,7 +28,6 @@ public class TransactionDAO {
     public boolean validate(Transaction transaction) throws BadRequestException, InternalServerException {
         if(transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed" + transaction.getId() + ". Can't be saved");
-        String[] cities = {"Kiev", "Odessa"};
 
         int sum = 0;
         int count = 0;
