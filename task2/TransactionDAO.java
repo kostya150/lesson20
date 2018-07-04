@@ -25,7 +25,7 @@ public class TransactionDAO {
         throw new LimitExceeded("There is no place to save" + transaction.getId() + ". Can't be saved");
     }
 
-    public boolean validate(Transaction transaction) throws BadRequestException, InternalServerException {
+    public boolean validate(Transaction transaction) throws Exception {
         if(transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed" + transaction.getId() + ". Can't be saved");
 
