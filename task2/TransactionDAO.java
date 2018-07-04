@@ -11,7 +11,7 @@ public class TransactionDAO {
     private Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
 
-    public Transaction save(Transaction transaction) throws BadRequestException, InternalServerException {
+    public Transaction save(Transaction transaction) throws Exception {
 
         if (validate(transaction)) {
             for (int i = 0; i <= transactions.length; i++) {
@@ -22,7 +22,7 @@ public class TransactionDAO {
             }
 
         }
-        return null;
+        throw new LimitExceeded("There is no place to save" + transaction.getId() + ". Can't be saved");
     }
 
     public boolean validate(Transaction transaction) throws BadRequestException, InternalServerException {
@@ -58,15 +58,10 @@ public class TransactionDAO {
      public Transaction[] transactionList() throws InternalServerException {
 
          for (int i = 0; i <= transactions.length; i++) {
-             if (transactions != null){
+             if (transactions[i] != null)
                  return transactions;
-             }else
-                 throw new InternalServerException("There are no transactions");
          }
-         return null;
-
-
-
+         throw new InternalServerException("There are no transactions");
     }
     public Transaction[] transactionList(String city) throws BadRequestException {
 
