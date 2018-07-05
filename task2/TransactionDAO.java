@@ -45,12 +45,11 @@ public class TransactionDAO {
         checkTransactionCity(transaction);
 
         for(int i = 0; i <= transactions.length; i++){
-            if(transaction.getCity().equals(transactions[i].getCity()) && transaction.getAmount() == (transactions[i].getAmount()) && transaction.getId() == (transactions[i].getId())
-                    && transaction.getType().equals(transactions[i].getType()) && transaction.getDescription().equals(transactions[i].getDescription()) ){
+       if(transaction.equals(transactions[i]));
+       throw new InternalServerException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
 
-            }
-        }
-        return true;
+    }
+    return true;
     }
 
     private void checkTransactionCity(Transaction transaction) throws BadRequestException{
