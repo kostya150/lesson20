@@ -46,9 +46,9 @@ public class TransactionDAO {
 
         for(int i = 0; i <= transactions.length; i++){
 
-            if(transaction.equals(transactions[i]));
-       throw new BadRequestException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
-
+            if(transaction.equals(transactions[i])){
+                throw new BadRequestException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
+            }
     }
     return true;
     }
