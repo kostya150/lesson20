@@ -44,13 +44,19 @@ public class TransactionDAO {
         }
         checkTransactionCity(transaction);
 
+        checkDublicates(transaction);
+
+
+        return true;
+    }
+
+    private void checkDublicates(Transaction transaction) throws BadRequestException{
         for(int i = 0; i <= transactions.length; i++){
 
             if(transaction.equals(transactions[i])){
                 throw new BadRequestException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
             }
-    }
-    return true;
+        }
     }
 
     private void checkTransactionCity(Transaction transaction) throws BadRequestException{
