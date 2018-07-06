@@ -22,7 +22,7 @@ public class TransactionDAO {
             }
 
         }
-        throw new LimitExceeded("There is no place to save" + transaction.getId() + ". Can't be saved");
+        throw new BadRequestException("There is no place to save" + transaction.getId() + ". Can't be saved");
     }
 
     public boolean validate(Transaction transaction) throws Exception {
@@ -35,7 +35,7 @@ public class TransactionDAO {
             sum += tr.getAmount();
             count++;
         }
-        if(sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount() && transaction.getAmount() > utils.getLimitSimpleTransactionAmount()){//TODO
+        if(sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()){//TODO
 
             throw new LimitExceeded("Transaction limit per day amount exceeded" + transaction.getId() + ". Can't be saved");
         }
@@ -45,8 +45,9 @@ public class TransactionDAO {
         checkTransactionCity(transaction);
 
         for(int i = 0; i <= transactions.length; i++){
-       if(transaction.equals(transactions[i]));
-       throw new InternalServerException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
+
+            if(transaction.equals(transactions[i]));
+       throw new BadRequestException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
 
     }
     return true;
