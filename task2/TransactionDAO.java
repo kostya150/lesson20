@@ -45,6 +45,7 @@ public class TransactionDAO {
         checkTransactionCity(transaction);
 
         checkDublicates(transaction);
+        //TODO не хватило места
 
 
         return true;
@@ -61,13 +62,12 @@ public class TransactionDAO {
 
     private void checkTransactionCity(Transaction transaction) throws BadRequestException{
         for(String c: utils.getCities()){
-            if(c.equals(transaction.getCity())){
+            if(c.equals(transaction.getCity()))
                 return;
             }
             throw new BadRequestException("Bad request of transaction" + transaction.getId() + ". Can't be saved");
         }
 
-    }
      public Transaction[] transactionList() {//TODO
          if (transactions != null) {
              int count = 0;
