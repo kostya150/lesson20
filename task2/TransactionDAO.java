@@ -22,7 +22,7 @@ public class TransactionDAO {
             }
 
         }
-        throw new BadRequestException("There is no place to save" + transaction.getId() + ". Can't be saved");
+        throw new InternalServerException("There is no place to save" + transaction.getId() + ". Can't be saved");
     }
 
     public boolean validate(Transaction transaction) throws Exception {
@@ -35,11 +35,11 @@ public class TransactionDAO {
             sum += tr.getAmount();
             count++;
         }
-        if(sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()){//TODO
+        if(sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()){
 
             throw new LimitExceeded("Transaction limit per day amount exceeded" + transaction.getId() + ". Can't be saved");
         }
-        if(count + 1 > utils. getLimitTransactionsPerDayCount()){//TODO
+        if(count + 1 > utils. getLimitTransactionsPerDayCount()){
             throw new LimitExceeded("Transaction limit per day count exceed" + transaction.getId() + ". Can't be saved");
         }
         checkTransactionCity(transaction);
@@ -62,13 +62,27 @@ public class TransactionDAO {
         }
 
     }
-     public Transaction[] transactionList() throws InternalServerException {
+     public Transaction[] transactionList() {//TODO
+         if (transactions != null) {
+             int count = 0;
 
-         for (int i = 0; i <= transactions.length; i++) {
-             if (transactions[i] != null)
-                 return transactions;
+             for (int i = 0; i < transactions.length; i++) {
+                 if(transactions[i] != null){
+                         count++;
+                     }
+                 }
+
+             Transaction[] transactions = new Transaction[count];
+
+             count = 0;
+             for (int i = 0; i < transactions.length; i++) {
+                 if (transactions[i] != null) {
+                     transactions[count] = transactions[i];
+                     count++;
+                 }
+             }
          }
-         throw new InternalServerException("There are no transactions");
+         return transactions;
     }
     public Transaction[] transactionList(String city) throws BadRequestException {
 
