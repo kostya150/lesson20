@@ -81,12 +81,7 @@ public class TransactionDAO {
              Transaction[] transactions = new Transaction[count];
 
              count = 0;
-             for (int i = 0; i < transactions.length; i++) {
-                 if (transactions[i] != null) {
-                     transactions[count] = transactions[i];
-                     count++;
-                 }
-             }
+             //if/else не нужен
          }
          return transactions;
     }
@@ -105,14 +100,8 @@ public class TransactionDAO {
             Transaction[] transactions = new Transaction[count];
 
             count = 0;
-            for (int i = 0; i < transactions.length; i++) {
-                if (transactions[i] != null) {
-                    transactions[count] = transactions[i];
-                    count++;
-                }
-            }
-        }else
-            throw new  BadRequestException("There are no transactions");
+            //if/else не нужен
+        }
         return transactions;
         }
 
@@ -129,14 +118,8 @@ public class TransactionDAO {
             Transaction[] transactions = new Transaction[count];
 
             count = 0;
-            for (int i = 0; i < transactions.length; i++) {
-                if (transactions[i] != null) {
-                    transactions[count] = transactions[i];
-                    count++;
-                }
-            }
-        }else
-            throw new  BadRequestException("There are no transactions");
+           //if/else не нужен
+        }
         return transactions;
     }
 
