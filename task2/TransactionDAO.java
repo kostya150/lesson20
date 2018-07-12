@@ -111,8 +111,7 @@ public class TransactionDAO {
                     count++;
                 }
             }
-        }else
-            throw new  BadRequestException("There are no transactions");
+        }
         return transactions;
         }
 
@@ -135,8 +134,7 @@ public class TransactionDAO {
                     count++;
                 }
             }
-        }else
-            throw new  BadRequestException("There are no transactions");
+        }
         return transactions;
     }
 
