@@ -69,7 +69,6 @@ public class TransactionDAO {
         }
 
      public Transaction[] transactionList() {//TODO
-         if (transactions != null) {
              int count = 0;
 
              for (int i = 0; i < transactions.length; i++) {
@@ -78,8 +77,6 @@ public class TransactionDAO {
                      }
                  }
 
-             Transaction[] transactions = new Transaction[count];
-
              count = 0;
              for (int i = 0; i < transactions.length; i++) {
                  if (transactions[i] != null) {
@@ -87,12 +84,12 @@ public class TransactionDAO {
                      count++;
                  }
              }
-         }
+         Transaction[] transactions = new Transaction[count];
+
          return transactions;
     }
     public Transaction[] transactionList(String city) throws BadRequestException {
 
-        if (transactions != null) {
             int count = 0;
 
             for (int i = 0; i < transactions.length; i++) {
@@ -102,7 +99,7 @@ public class TransactionDAO {
                 }
                 }
             }
-            Transaction[] transactions = new Transaction[count];
+
 
             count = 0;
             for (int i = 0; i < transactions.length; i++) {
@@ -111,13 +108,14 @@ public class TransactionDAO {
                     count++;
                 }
             }
-        }
+        Transaction[] transactions = new Transaction[count];
+
         return transactions;
         }
 
     public Transaction[] transactionList(int amount) throws BadRequestException {
 
-        if (transactions != null) {
+
             int count = 0;
 
             for (int i = 0; i < transactions.length; i++) {
@@ -125,7 +123,7 @@ public class TransactionDAO {
                     count++;
                 }
             }
-            Transaction[] transactions = new Transaction[count];
+
 
             count = 0;
             for (int i = 0; i < transactions.length; i++) {
@@ -134,7 +132,8 @@ public class TransactionDAO {
                     count++;
                 }
             }
-        }
+            Transaction[] transactions = new Transaction[count];
+
         return transactions;
     }
 
