@@ -14,7 +14,7 @@ public class TransactionDAO {
     public Transaction save(Transaction transaction) throws Exception {
 
         if (validate(transaction)) {
-            for (int i = 0; i <= transactions.length - 1; i++) {
+            for (int i = 0; i < transactions.length; i++) {
                 if (transactions[i] == null) {
                     transactions[i] = transaction;
                     return transactions[i];
@@ -52,7 +52,7 @@ public class TransactionDAO {
     }
 
     private void checkDublicates(Transaction transaction) throws BadRequestException{
-        for(int i = 0; i <= transactions.length - 1; i++){
+        for(int i = 0; i < transactions.length; i++){
 
             if(transaction.equals(transactions[i])){
                 throw new BadRequestException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
@@ -81,7 +81,12 @@ public class TransactionDAO {
              Transaction[] transactions = new Transaction[count];
 
              count = 0;
-             //if/else не нужен
+             for (int i = 0; i < transactions.length; i++) {
+                 if (transactions[i] != null) {
+                     transactions[count] = transactions[i];
+                     count++;
+                 }
+             }
          }
          return transactions;
     }
@@ -100,8 +105,14 @@ public class TransactionDAO {
             Transaction[] transactions = new Transaction[count];
 
             count = 0;
-            //if/else не нужен
-        }
+            for (int i = 0; i < transactions.length; i++) {
+                if (transactions[i] != null) {
+                    transactions[count] = transactions[i];
+                    count++;
+                }
+            }
+        }else
+            throw new  BadRequestException("There are no transactions");
         return transactions;
         }
 
@@ -118,8 +129,14 @@ public class TransactionDAO {
             Transaction[] transactions = new Transaction[count];
 
             count = 0;
-           //if/else не нужен
-        }
+            for (int i = 0; i < transactions.length; i++) {
+                if (transactions[i] != null) {
+                    transactions[count] = transactions[i];
+                    count++;
+                }
+            }
+        }else
+            throw new  BadRequestException("There are no transactions");
         return transactions;
     }
 
