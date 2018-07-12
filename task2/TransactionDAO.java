@@ -14,7 +14,7 @@ public class TransactionDAO {
     public Transaction save(Transaction transaction) throws Exception {
 
         if (validate(transaction)) {
-            for (int i = 0; i <= transactions.length; i++) {
+            for (int i = 0; i <= transactions.length - 1; i++) {
                 if (transactions[i] == null) {
                     transactions[i] = transaction;
                     return transactions[i];
@@ -52,7 +52,7 @@ public class TransactionDAO {
     }
 
     private void checkDublicates(Transaction transaction) throws BadRequestException{
-        for(int i = 0; i <= transactions.length; i++){
+        for(int i = 0; i <= transactions.length - 1; i++){
 
             if(transaction.equals(transactions[i])){
                 throw new BadRequestException("Such transaction is already exists " + transaction.getId() + "Can't be saved");
