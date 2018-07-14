@@ -71,69 +71,65 @@ public class TransactionDAO {
      public Transaction[] transactionList() {
              int count = 0;
 
-             for (int i = 0; i < transactions.length; i++) {
-                 if(transactions[i] != null){
+             for (Transaction transaction:transactions) {
+                 if(transaction != null){
                          count++;
                      }
                  }
 
              Transaction[] transactions = new Transaction[count];
 
-             count = 0;
-             for (int i = 0; i < transactions.length; i++) {
-                 if (transactions[i] != null) {
-                     transactions[count] = transactions[i];
-                     count++;
+             int index = 0;
+             for (Transaction transaction:transactions) {
+                 if (transaction != null) {
+                     transactions[index] = transaction;
+                     index++;
                  }
              }
-         Transaction[] transactions2 = new Transaction[count];
 
-         return transactions2;
+
+         return transactions;
     }
     public Transaction[] transactionList(String city) throws BadRequestException {
 
             int count = 0;
 
-            for (int i = 0; i < transactions.length; i++) {
-                if(transactions[i] != null){
-                if(city.equals(transactions[i].getCity())){
+            for (Transaction transaction:transactions) {
+                if(transaction != null && city.equals(transaction.getCity())){
                     count++;
-                }
                 }
             }
 
         Transaction[] transactions = new Transaction[count];
-            count = 0;
-            for (int i = 0; i < transactions.length; i++) {
-                if (transactions[i] != null) {
-                    transactions[count] = transactions[i];
-                    count++;
+            int index = 0;
+            for (Transaction transaction: transactions) {
+                if (transaction != null && city.equals(transaction.getCity())) {
+                    transactions[index] = transaction;
+                    index++;
                 }
             }
-        Transaction[] transactions2 = new Transaction[count];
 
-
-        return transactions2;
+        return transactions;
         }
 
     public Transaction[] transactionList(int amount) throws BadRequestException {
             int count = 0;
-            for (int i = 0; i < transactions.length; i++) {
-                if (amount == transactions[i].getAmount()) {
+            for (Transaction transaction: transactions) {
+                if (transaction != null && amount == transaction.getAmount()) {
                     count++;
                 }
             }
 
         Transaction[] transactions = new Transaction[count];
-            count = 0;
-            for (int i = 0; i < transactions.length; i++) {
-                if (transactions[i] != null) {
-                    transactions[count] = transactions[i];
-                    count++;
+            int index = 0;
+            for (Transaction transaction:transactions) {
+                if (transaction != null && amount == transaction.getAmount() ) {
+                    transactions[index] = transaction;
+                    index++;
                 }
             }
-        Transaction[] transactions2 = new Transaction[count];
-        return transactions2;
+
+        return transactions;
     }
 
     private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction){
