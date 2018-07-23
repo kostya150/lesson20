@@ -8,10 +8,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TransactionDAO {
-    private Transaction[] transactions = new Transaction[10];
-    private Utils utils = new Utils();
+    private static Transaction[] transactions = new Transaction[10];
+    private static Utils utils = new Utils();
 
-    public Transaction save(Transaction transaction) throws Exception {
+    public static Transaction save(Transaction transaction) throws Exception {
 
         if (validate(transaction)) {
             for (int i = 0; i < transactions.length; i++) {
@@ -25,7 +25,7 @@ public class TransactionDAO {
         throw new InternalServerException("There is no place to save" + transaction.getId() + ". Can't be saved");
     }
 
-    public boolean validate(Transaction transaction) throws Exception {
+    public static boolean validate(Transaction transaction) throws Exception {
         if(transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed" + transaction.getId() + ". Can't be saved");
 
@@ -51,7 +51,7 @@ public class TransactionDAO {
         return true;
     }
 
-    private void checkDublicates(Transaction transaction) throws BadRequestException{
+    private static void checkDublicates(Transaction transaction) throws BadRequestException{
         for(int i = 0; i < transactions.length; i++){
 
             if(transaction.equals(transactions[i])){
@@ -60,7 +60,7 @@ public class TransactionDAO {
         }
     }
 
-    private void checkTransactionCity(Transaction transaction) throws BadRequestException{
+    private static void checkTransactionCity(Transaction transaction) throws BadRequestException{
         for(String c: utils.getCities()){
             if(c.equals(transaction.getCity()))
                 return;
@@ -68,7 +68,7 @@ public class TransactionDAO {
             throw new BadRequestException("Bad request of transaction" + transaction.getId() + ". Can't be saved");
         }
 
-     public Transaction[] transactionList() {
+     public static Transaction[] transactionList() {
              int count = 0;
 
              for (Transaction transaction:transactions) {
@@ -90,7 +90,7 @@ public class TransactionDAO {
 
          return res;
     }
-    public Transaction[] transactionList(String city)  {
+    public static Transaction[] transactionList(String city)  {
 
             int count = 0;
 
@@ -112,7 +112,7 @@ public class TransactionDAO {
         return res;
         }
 
-    public Transaction[] transactionList(int amount)  {
+    public static Transaction[] transactionList(int amount)  {
             int count = 0;
             for (Transaction transaction: transactions) {
                 if (transaction != null && amount == transaction.getAmount()) {
@@ -132,7 +132,7 @@ public class TransactionDAO {
         return res;
     }
 
-    private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction){
+    private static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
